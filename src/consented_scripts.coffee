@@ -38,7 +38,17 @@ REASK_AFTER = 30 # days
 # If user has given consent, expire in a year
 EXPIRE_AFTER = 365 # days
 
-ASK_EVENT_NAME = "cs.modal.show"
+##
+# This event is triggered when the script is run if we don't have consent yet.
+ASK_EVENT_NAME = "cs.ask"
+
+##
+# This event is triggered when the script is run if we don't have consent yet.
+ACCEPTED_EVENT_NAME = "cs.accepted"
+
+##
+# This event is triggered when the script is run if we don't have consent yet.
+REJECTED_EVENT_NAME = "cs.rejected"
 
 # =============
 # = Functions =
@@ -46,14 +56,15 @@ ASK_EVENT_NAME = "cs.modal.show"
 
 # Initial method, called to setup
 init = ->
-  acceptButton = document.querySelector('.js-cookie-consent-accept')
-  acceptButton.addEventListener("click", onAccept) if acceptButton
-
-  rejectButton = document.querySelector('.js-cookie-consent-reject')
-  rejectButton.addEventListener("click", onReject) if rejectButton
-
-  return askCookies() unless cookiesAsked()
-  executeConditionalScripts() if cookiesConsented()
+  document.addEventListener(ACCEPTED_EVENT_NAME, onAccept)
+  document.addEventListener(REJECTED_EVENT_NAME, onReject)
+  if !cookiesAsked()
+    return askCookies()
+  else if cookiesConsented()
+    return executeConditionalScripts()
+  else
+    # In this case, the user has been asked to approve optional cookies and has
+    # refused
 
 # Set the cookie to the given value.
 #
@@ -68,7 +79,7 @@ setCookiesConsented = (value, expiresIn = EXPIRE_AFTER) ->
 #
 # Returns Boolean
 cookiesAsked = ->
-  Cookies.get(COOKIE_NAME) != undefined
+  !(Cookies.get(COOKIE_NAME) == undefined || Cookies.get(COOKIE_NAME) == null)
 
 # Has the visitor already given consent for use of cookies?
 #
@@ -102,16 +113,11 @@ askCookies = ->
 
 
 # Callback when the cookies have been acccepted.
-onAccept = (e) ->
-  e.preventDefault()
+onAccept = () ->
   setCookiesConsented("true")
 
-# Callback when the cookies have been rejecte.
-onReject = (e) ->
-  e.preventDefault()
+# Callback when the cookies have been rejected.
+onReject = () ->
   setCookiesConsented("false", REASK_AFTER)
 
-start = ->
-  init()
-
-export { init, start }
+export { init, ACCEPTED_EVENT_NAME, REJECTED_EVENT_NAME, ASK_EVENT_NAME }

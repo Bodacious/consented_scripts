@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "coffee --output ./dist src",
+    "build": "coffee --output ./dist src && coffee --output ./app/javascript src",
     "test": "yarn exec jasmine spec/**/*.js"
   },
   "name": "consented_scripts",

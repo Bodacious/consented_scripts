@@ -1,10 +1,31 @@
 # ConsentedScripts
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/consented_scripts`. To experiment with that code, run `bin/console` for an interactive prompt.
+A simple Javascript pack for managing user consent to cookies.
 
-TODO: Delete this and the text above, and describe your gem
+If your site distinguishes between necessary and optional cookies, this pack
+will help you mark certain scripts as "consent only". This means that services
+such as Google Analytics and Facebook Pixels can be loaded on a consented basis.
 
 ## Installation
+
+### Yarn Installation
+
+Add the JS package by running the following command in the command line:
+
+```
+yarn add consented_scripts
+```
+
+And then include it in your file:
+
+``` javascript
+let ConsentedScripts = require("consented_scripts");
+```
+
+### Rails Installation
+
+The main bulk of this library is in the Javascript, but you can install the gem
+to your Rails app for a helpful view helper.
 
 Add this line to your application's Gemfile:
 
@@ -22,7 +43,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### JS Usage
+
+
+### Rails Usage
+
+Do the above, but also...
 
 ## Development
 
