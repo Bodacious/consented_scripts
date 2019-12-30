@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "yarn exec webpack -- --mode=production",
+    "build": "coffee --output ./dist src",
     "test": "yarn exec jasmine spec/**/*.js"
   },
   "name": "consented_scripts",
@@ -33,5 +33,10 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "js.cookie": "^0.0.4"
+  },
+  "peerDependencies": {
+    "consented_scripts": "/Users/Gavin/Code/consented_scripts"
+  }
 }

@@ -16,6 +16,8 @@
 #
 #
 
+Cookies = require "js.cookie"
+
 # =============
 # = Constants =
 # =============
@@ -109,4 +111,7 @@ onReject = (e) ->
   e.preventDefault()
   setCookiesConsented("false", REASK_AFTER)
 
-export { init }
+start = ->
+  init()
+
+export { init, start }
