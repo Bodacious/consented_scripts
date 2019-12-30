@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "build": "webpack --mode=production"
+    "build": "yarn exec webpack -- --mode=production",
+    "test": "yarn exec jasmine spec/**/*.js"
   },
   "name": "consented_scripts",
   "version": "0.1.0",
@@ -31,5 +32,6 @@
     "coffeescript": "^2.4.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  }
+  },
+  "dependencies": {}
 }

@@ -109,4 +109,4 @@ onReject = (e) ->
   e.preventDefault()
   setCookiesConsented("false", REASK_AFTER)
 
-export default init
+export { init }
