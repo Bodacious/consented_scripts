@@ -73,7 +73,7 @@ init = ->
 #             (defaults: EXPIRE_AFTER).
 #
 setCookiesConsented = (value, expiresIn = EXPIRE_AFTER) ->
-  Cookies.set(COOKIE_NAME, String(value), { expires: parseInt(expiresIn) })
+  Cookies.set(COOKIE_NAME, value, { expires: parseInt(expiresIn) })
 
 # Has the visitor already been asked their cookie preference?
 #
@@ -85,13 +85,13 @@ cookiesAsked = ->
 #
 # Returns Boolean
 cookiesConsented = ->
-  Cookies.get(COOKIE_NAME) == "true"
+  Cookies.get(COOKIE_NAME) == true
 
 # Has the visitor already rejected consent for use of cookies?
 #
 # Returns Boolean
 cookiesRejected = ->
-  Cookies.get(COOKIE_NAME) == "false"
+  Cookies.get(COOKIE_NAME) == false
 
 # Execute the conditional scripts on the page, asssuming consent has been given.
 #
@@ -114,10 +114,10 @@ askCookies = ->
 
 # Callback when the cookies have been acccepted.
 onAccept = () ->
-  setCookiesConsented("true")
+  setCookiesConsented(true)
 
 # Callback when the cookies have been rejected.
 onReject = () ->
-  setCookiesConsented("false", REASK_AFTER)
+  setCookiesConsented(false, REASK_AFTER)
 
 export { init, ACCEPTED_EVENT_NAME, REJECTED_EVENT_NAME, ASK_EVENT_NAME }
