@@ -35,8 +35,5 @@
   },
   "dependencies": {
     "js.cookie": "^0.0.4"
-  },
-  "peerDependencies": {
-    "consented_scripts": "/Users/Gavin/Code/consented_scripts"
   }
 }
